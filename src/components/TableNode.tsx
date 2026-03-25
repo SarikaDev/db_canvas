@@ -33,21 +33,35 @@ export default function TableNode({ data }: NodeProps<TableNodeData>) {
       className={`bg-white rounded-lg shadow-lg border border-gray-200 border-l-4 ${borderColor} min-w-[320px] max-w-[400px]`}
     >
       {/* React Flow handles */}
-      <Handle type="target" position={Position.Left} id="target" className="!bg-blue-400" />
-      <Handle type="source" position={Position.Right} id="source" className="!bg-blue-400" />
+      <Handle
+        type="target"
+        position={Position.Left}
+        id="target"
+        className="!bg-blue-400"
+      />
+      <Handle
+        type="source"
+        position={Position.Right}
+        id="source"
+        className="!bg-blue-400"
+      />
 
       {/* Header */}
       <div className="flex items-center gap-2 px-3 py-2 bg-gray-50 border-b border-gray-200 rounded-t-lg">
         <input
           type="text"
           value={table.name}
-          onChange={(e) => updateTableName(schemaName, table.id, e.target.value)}
-          onKeyDown={(e) => e.key === "Enter" && (e.target as HTMLInputElement).blur()}
+          onChange={(e) =>
+            updateTableName(schemaName, table.id, e.target.value)
+          }
+          onKeyDown={(e) =>
+            e.key === "Enter" && (e.target as HTMLInputElement).blur()
+          }
           className="flex-1 text-sm font-semibold font-mono bg-transparent border-none outline-none text-gray-800 min-w-0"
           placeholder="table_name"
         />
-
-        <label className="flex items-center gap-1 text-xs text-gray-500 cursor-pointer select-none shrink-0">
+        {/* Phase-02 disabled RLS option*/}
+        <label className="hidden flex items-center gap-1 text-xs text-gray-500 cursor-pointer select-none shrink-0">
           <input
             type="checkbox"
             checked={table.rlsEnabled}
@@ -69,7 +83,9 @@ export default function TableNode({ data }: NodeProps<TableNodeData>) {
       {/* Columns */}
       <div className="flex flex-col divide-y divide-gray-100">
         {table.columns.length === 0 ? (
-          <p className="text-xs text-gray-400 px-3 py-2 italic">No columns yet</p>
+          <p className="text-xs text-gray-400 px-3 py-2 italic">
+            No columns yet
+          </p>
         ) : (
           table.columns.map((col) => (
             <ColumnRow

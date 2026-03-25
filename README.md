@@ -35,16 +35,19 @@ DB Architect solves all three in one place.
 ## Features
 
 ### Schema Management
+
 - Three pre-provided schemas: `public`, `auth`, `app`
 - Cross-schema foreign key references supported
 - Essential for Supabase RLS patterns referencing `auth.users`
 
 ### Table Builder
+
 - Drag and drop table cards on the canvas
 - Inline editable table names
 - Per-table RLS toggle
 
 ### Column Definition
+
 - Full PostgreSQL type support (19 types)
 - Primary Key, Not Null, Unique flags per column
 - Optional default value and CHECK expression
@@ -52,14 +55,18 @@ DB Architect solves all three in one place.
 - ON DELETE rule: RESTRICT, CASCADE, SET NULL, SET DEFAULT, NO ACTION
 
 ### Auto Index Suggestions
+
 Automatically suggests indexes for:
+
 - Every foreign key column
 - Columns named: `email`, `username`, `slug`, `phone`, `status`, `type`, `role`
 
 ### Validation Engine
+
 Runs on every state change. Enforces real PostgreSQL production standards.
 
 **Hard Errors** (block SQL generation, score → 0):
+
 - Duplicate column names within the same table
 - Empty table or column names
 - PostgreSQL reserved keywords used as identifiers
@@ -68,6 +75,7 @@ Runs on every state change. Enforces real PostgreSQL production standards.
 - FK referencing a column that is neither PK nor UNIQUE
 
 **Warnings** (reduce score with specific deductions):
+
 - No primary key defined (-20)
 - `serial`/`bigserial` used instead of `uuid` for PK (-8)
 - `timestamp` used instead of `timestamptz` (-8 per column)
@@ -81,13 +89,15 @@ Runs on every state change. Enforces real PostgreSQL production standards.
 - `int` used for PK instead of `uuid` or `bigint` (-5)
 
 ### Score System
-| Score | Status |
-|-------|--------|
-| 90–100 | Production ready |
-| 70–89 | Good, minor issues |
+
+| Score    | Status                 |
+| -------- | ---------------------- |
+| 90–100   | Production ready       |
+| 70–89    | Good, minor issues     |
 | Below 70 | Needs fixes before use |
 
 ### SQL Output
+
 - Live SQL panel updates on every change
 - Per-table copy button
 - Full schema export as `.md` migration file with SQL code fences
@@ -95,6 +105,7 @@ Runs on every state change. Enforces real PostgreSQL production standards.
 - RLS policy stubs generated automatically when RLS is enabled
 
 ### Persistence
+
 - Full state saved to `localStorage` automatically
 - Rehydrates on page refresh
 - Clear Canvas button with confirmation dialog
@@ -103,30 +114,30 @@ Runs on every state change. Enforces real PostgreSQL production standards.
 
 ## How It Compares
 
-| Feature | DB Architect | dbdiagram.io | DrawSQL | Supabase Editor |
-|---------|-------------|--------------|---------|-----------------|
-| Drag and drop | ✅ | ❌ (DSL syntax) | ✅ | ✅ |
-| PostgreSQL standards validation | ✅ | ❌ | ❌ | ❌ |
-| Correctness score | ✅ | ❌ | ❌ | ❌ |
-| RLS policy generation | ✅ | ❌ | ❌ | ✅ |
-| Cross-schema FK support | ✅ | ✅ | ❌ | ✅ |
-| No account required | ✅ | ✅ | ❌ | ❌ |
-| Export as .md migration file | ✅ | ❌ | ❌ | ❌ |
-| Works offline | ✅ | ❌ | ❌ | ❌ |
+| Feature                         | DB Architect | dbdiagram.io    | DrawSQL | Supabase Editor |
+| ------------------------------- | ------------ | --------------- | ------- | --------------- |
+| Drag and drop                   | ✅           | ❌ (DSL syntax) | ✅      | ✅              |
+| PostgreSQL standards validation | ✅           | ❌              | ❌      | ❌              |
+| Correctness score               | ✅           | ❌              | ❌      | ❌              |
+| RLS policy generation           | ✅           | ❌              | ❌      | ✅              |
+| Cross-schema FK support         | ✅           | ✅              | ❌      | ✅              |
+| No account required             | ✅           | ✅              | ❌      | ❌              |
+| Export as .md migration file    | ✅           | ❌              | ❌      | ❌              |
+| Works offline                   | ✅           | ❌              | ❌      | ❌              |
 
 ---
 
 ## Tech Stack
 
-| Layer | Technology |
-|-------|-----------|
-| Framework | React 18 + TypeScript (strict mode) |
-| Canvas | React Flow |
-| State | Zustand with persist middleware |
-| Styling | Tailwind CSS |
-| Build | Vite |
-| Deployment | Vercel |
-| Storage | localStorage (no backend, no API) |
+| Layer      | Technology                          |
+| ---------- | ----------------------------------- |
+| Framework  | React 18 + TypeScript (strict mode) |
+| Canvas     | React Flow                          |
+| State      | Zustand with persist middleware     |
+| Styling    | Tailwind CSS                        |
+| Build      | Vite                                |
+| Deployment | Vercel                              |
+| Storage    | localStorage (no backend, no API)   |
 
 ---
 
@@ -154,6 +165,7 @@ architectural rework.
 ---
 
 ## File Structure
+
 ```
 src/
   types/
@@ -180,6 +192,7 @@ src/
 ---
 
 ## Running Locally
+
 ```bash
 git clone https://github.com/yourusername/db-architect
 cd db-architect
@@ -218,4 +231,5 @@ built what I specified. I specified what I knew.
 ## Author
 
 Built by Sairam Sarika
-[GitHub](#) · [LinkedIn](#)
+[GitHub](https://github.com/SarikaDev/db_canvas) · [LinkedIn](https://www.linkedin.com/in/sairam-sarika-79758935a/) .
+[Live Demo](https://db-canvas-eight.vercel.app/)

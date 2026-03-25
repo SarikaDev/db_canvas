@@ -1,3 +1,4 @@
+import { memo, useState, useEffect } from "react";
 import { NodeProps, Handle, Position } from "reactflow";
 import { useSchemaStore } from "../store/useSchemaStore";
 import { validateTable } from "../lib/validator";
@@ -9,16 +10,22 @@ interface TableNodeData {
   schemaName: SchemaName;
 }
 
-export default function TableNode({ data }: NodeProps<TableNodeData>) {
+// FIX: Wrap in memo to prevent unnecessary re-renders of the table structure
+const TableNode = memo(({ data }: NodeProps<TableNodeData>) => {
   const { table, schemaName } = data;
   const schemas = useSchemaStore((s) => s.schemas);
   const updateTableName = useSchemaStore((s) => s.updateTableName);
-  const toggleRLS = useSchemaStore((s) => s.toggleRLS);
   const deleteTable = useSchemaStore((s) => s.deleteTable);
   const addColumn = useSchemaStore((s) => s.addColumn);
 
-  const { errors, warnings } = validateTable(table, schemas);
+  // Local state for table name to prevent cursor focus loss
+  const [localTableName, setLocalTableName] = useState(table.name);
 
+  useEffect(() => {
+    setLocalTableName(table.name);
+  }, [table.name]);
+
+  const { errors, warnings } = validateTable(table, schemas);
   const borderColor =
     errors.length > 0
       ? "border-l-red-500"
@@ -50,27 +57,17 @@ export default function TableNode({ data }: NodeProps<TableNodeData>) {
       <div className="flex items-center gap-2 px-3 py-2 bg-gray-50 border-b border-gray-200 rounded-t-lg">
         <input
           type="text"
-          value={table.name}
-          onChange={(e) =>
-            updateTableName(schemaName, table.id, e.target.value)
-          }
+          value={localTableName}
+          onChange={(e) => {
+            setLocalTableName(e.target.value);
+            updateTableName(schemaName, table.id, e.target.value);
+          }}
           onKeyDown={(e) =>
             e.key === "Enter" && (e.target as HTMLInputElement).blur()
           }
           className="flex-1 text-sm font-semibold font-mono bg-transparent border-none outline-none text-gray-800 min-w-0"
           placeholder="table_name"
         />
-        {/* Phase-02 disabled RLS option flex items-center */}
-        <label className="gap-1 hidden  text-xs text-gray-500 cursor-pointer select-none shrink-0">
-          <input
-            type="checkbox"
-            checked={table.rlsEnabled}
-            onChange={() => toggleRLS(schemaName, table.id)}
-            className="w-3 h-3"
-          />
-          RLS
-        </label>
-
         <button
           onClick={() => deleteTable(schemaName, table.id)}
           className="text-gray-400 hover:text-red-500 text-xs transition-colors shrink-0"
@@ -80,14 +77,13 @@ export default function TableNode({ data }: NodeProps<TableNodeData>) {
         </button>
       </div>
 
-      {/* Columns */}
       <div className="flex flex-col divide-y divide-gray-100">
-        {table.columns.length === 0 ? (
+        {table?.columns.length === 0 ? (
           <p className="text-xs text-gray-400 px-3 py-2 italic">
             No columns yet
           </p>
         ) : (
-          table.columns.map((col) => (
+          table?.columns?.map((col) => (
             <ColumnRow
               key={col.id}
               column={col}
@@ -110,4 +106,6 @@ export default function TableNode({ data }: NodeProps<TableNodeData>) {
       </div>
     </div>
   );
-}
+});
+
+export default TableNode;

@@ -3,7 +3,7 @@
 A free, browser-based tool for designing production-ready PostgreSQL database
 schemas visually — without writing a single line of SQL manually.
 
-🔗 **Live Demo:** [your-vercel-url.vercel.app](#)
+🔗 **Live Demo:** [https://db-canvas-eight.vercel.app/](#)
 
 ---
 
@@ -226,10 +226,8 @@ patterns, the index suggestion logic — none of that came from AI. That came
 from understanding how PostgreSQL actually behaves in production. The AI
 built what I specified. I specified what I knew.
 
----
-
 ## Author
 
-Built by Sairam Sarika
-[GitHub](https://github.com/SarikaDev/db_canvas) · [LinkedIn](https://www.linkedin.com/in/sairam-sarika-79758935a/) .
-[Live Demo](https://db-canvas-eight.vercel.app/)
+**Sairam Sarika** [Portfolio](https://sarikaa-portfolio.vercel.app/portfolio) · [GitHub](https://github.com/SarikaDev) · [LinkedIn](https://www.linkedin.com/in/sairam-sarika-79758935a/)
+
+Built with a deep focus on PostgreSQL DX (Developer Experience).

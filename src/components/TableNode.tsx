@@ -60,8 +60,8 @@ export default function TableNode({ data }: NodeProps<TableNodeData>) {
           className="flex-1 text-sm font-semibold font-mono bg-transparent border-none outline-none text-gray-800 min-w-0"
           placeholder="table_name"
         />
-        {/* Phase-02 disabled RLS option*/}
-        <label className="hidden flex items-center gap-1 text-xs text-gray-500 cursor-pointer select-none shrink-0">
+        {/* Phase-02 disabled RLS option flex items-center */}
+        <label className="gap-1 hidden  text-xs text-gray-500 cursor-pointer select-none shrink-0">
           <input
             type="checkbox"
             checked={table.rlsEnabled}

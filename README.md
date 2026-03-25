@@ -3,7 +3,7 @@
 A free, browser-based tool for designing production-ready PostgreSQL database
 schemas visually — without writing a single line of SQL manually.
 
-🔗 **Live Demo:** [https://db-canvas-eight.vercel.app/](#)
+🔗 **Live Demo:** [https://db-canvas-eight.vercel.app/](https://db-canvas-eight.vercel.app/)
 
 ---
 
